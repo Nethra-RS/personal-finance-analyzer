@@ -1,0 +1,55 @@
+version: 2
+
+sources:
+  - name: raw
+    database: personal_finance_db
+    schema: raw
+    tables:
+      - name: transactions_raw
+        description: "Raw Kaggle transactions data"
+
+  - name: staging
+    database: personal_finance_db
+    schema: staging
+    tables:
+      - name: stg_transactions
+        description: "cleaned transactions data"
+
+models:
+  - name: stg_transactions
+    description: "Cleaned transactions data"
+    columns:
+      - name: transaction_id
+        description: "Unique identifier for each transaction row."
+        tests:
+          - not_null
+          - unique
+
+      - name: transaction_date
+        description: "The date when the transaction occurred."
+        tests:
+          - not_null
+        
+      - name: description
+        description: "Transaction description text. Null values are allowed."
+
+      - name: category
+        description: "Transaction category from raw data, standardized to uppercase."
+        tests:
+          - not_null
+        
+      - name: transaction_amount
+        description: "Transaction amount in dollars. Only positive amounts are included."
+        tests:
+          - not_null
+          - custom_positive_amount
+
+      - name: type
+        description: "Transaction type, standardized to INCOME or EXPENSE."
+        tests:
+          - not_null
+          - custom_accepted_values:
+              allowed_values: ["EXPENSE","INCOME"]
+      
+       
+          
