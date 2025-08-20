@@ -15,7 +15,7 @@ This project provides insights into personal income and spending trends using a 
 ---
 ## 🧾 Dataset
 
-**Source:** [Kaggle – Personal Finance Data (Synthetic)]  
+**Source:** [Kaggle – Personal Finance Data (Synthetic)](https://www.kaggle.com/datasets/ramyapintchy/personal-finance-data?resource=download)  
 **Duration:** Jan 1, 2020 to Dec 31, 2024  
 **Fields:**
 - `Date`: Date of transaction
@@ -46,11 +46,13 @@ This project provides insights into personal income and spending trends using a 
    
 ---
 ## 🛠️ Folder Structure
+```
 ├── dataset/ → sample dataset
 ├── dbt_models/ → SQL transformations
 ├── tableau/ → dashboards & screenshots
 ├── README.md
-├── Documentation 
+├── Documentation
+```
 
 ---
 
@@ -70,7 +72,6 @@ This project provides insights into personal income and spending trends using a 
 ---
 
 ## 📷 Screenshots
-![Monthly Summary](./tableau/Monthly%20Summary%20(Income%20vs%20Expense%20vs%20Savings).png
 ![Dashboard](./tableau/Dashboard%201.png)
 
 ---
@@ -79,22 +80,24 @@ This project provides insights into personal income and spending trends using a 
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/your-username/personal-finance-analyzer.git
+git clone https://github.com/Nethra-RS/personal-finance-analyzer.git
 cd personal-finance-analyzer
 ```
 
 ### 2. Load Data to Snowflake
 
 - Create Snowflake database and schemas:
-
+```
 CREATE DATABASE personal_finance_db;
 USE DATABASE personal_finance_db;
 
 CREATE SCHEMA raw;
 CREATE SCHEMA staging;
 CREATE SCHEMA marts;
+```
 
 -Create Raw Table
+```
 CREATE OR REPLACE TABLE raw.transactions_raw (
     date STRING,
     transaction_description STRING,
@@ -102,17 +105,19 @@ CREATE OR REPLACE TABLE raw.transactions_raw (
     amount FLOAT,
     type STRING
 );
-
-e.g., “Upload your transactions.csv file to the raw.transactions_raw table via Snowflake UI or SnowSQL”).
+```
+Upload your transactions.csv file to the raw.transactions_raw table via Snowflake UI or SnowSQL.
 
 ### 3. Install dbt & Run Models
 
 ```
 pip install dbt-snowflake
 ```
+```
 dbt debug         # Test Snowflake connection
 dbt run           # Run all models
 dbt test          # Validate transformations
+```
 
 ### 4. Open Tableau Dashboard
 
@@ -126,7 +131,7 @@ Open .twbx from /tableau/ directory
 See Documentation/
 for:
 
--Full ELT pipeline explanation
+-Full ELT pipeline explanation 
 -KPI definitions
 -Architecture diagrams
 
